@@ -22,3 +22,6 @@ HEADERS += \
   bogie.h \
   customer.h \
   party_member.h
+
+DISTFILES += \
+  README.md
