@@ -11,7 +11,8 @@ SOURCES += \
         bogie.cpp \
         customer.cpp \
         party_member.cpp \
-        run.cpp
+        run.cpp \
+        validation.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -21,7 +22,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
   bogie.h \
   customer.h \
-  party_member.h
+  party_member.h \
+  validation.h
 
 DISTFILES += \
   README.md
