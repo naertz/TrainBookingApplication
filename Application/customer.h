@@ -8,7 +8,7 @@
 
 class Customer {
 	public:
-		Customer(std::string const first_name, std::string const last_name, std::vector<PartyMember> const party, std::string const destination);
+		Customer(std::string const first_name, std::string const last_name, std::vector<PartyMember> party, std::string const destination);
 		std::string get_first_name(void) const;
 		std::string get_last_name(void) const;
 		std::vector<PartyMember> get_party(void) const;

@@ -21,6 +21,6 @@ std::string PartyMember::get_last_name(void) const {
 	return last_name;
 }
 
-unsigned int PartyMember::get_age(void) const {
+int PartyMember::get_age(void) const {
 	return age;
 }
