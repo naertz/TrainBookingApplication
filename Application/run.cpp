@@ -35,12 +35,12 @@ int main() {
 
 	// Option selections initialized for while loops
 	int main_option_selection = -1;
-	int passengers_option_selection = -1;
-	int bogies_option_selection = -1;
+	int customers_option_selection = -1;
+	int trains_option_selection = -1;
 
 	// Vector of strings for main options to use to determine dynamic padding
 	std::vector<std::string> main_number_column = { "#", "0", "1", "2" };
-	std::vector<std::string> main_option_column = { "Option", "Passengers", "Bogies", "Quit" };
+	std::vector<std::string> main_option_column = { "Option", "Customers", "Trains", "Quit" };
 
 	// Length of longest string of each main menu column
 	const int longest_main_number_length = get_longest_string_length(main_number_column);
@@ -80,40 +80,40 @@ int main() {
 		// Determine main option selected.
 		if (main_option_selection == std::stoi(main_number_column[1])) {
 			do {
-				// Vectors of strings for passenger options to use to determine dynamic padding
-				std::vector<std::string> passengers_number_column = { "#", "0", "1" };
-				exit_value = std::stoi(passengers_number_column.back());
-				std::vector<std::string> passengers_option_column = { "Option", "Enter New Customer", "Return" };
+				// Vectors of strings for customer options to use to determine dynamic padding
+				std::vector<std::string> customers_number_column = { "#", "0", "1" };
+				exit_value = std::stoi(customers_number_column.back());
+				std::vector<std::string> customers_option_column = { "Option", "Enter New Customer", "Return" };
 
-				// Length of longest string of each passengers menu column
-				const int longest_passengers_number_length = get_longest_string_length(passengers_number_column);
-				const int longest_passengers_option_length = get_longest_string_length(passengers_option_column);
+				// Length of longest string of each customers menu column
+				const int longest_customers_number_length = get_longest_string_length(customers_number_column);
+				const int longest_customers_option_length = get_longest_string_length(customers_option_column);
 
 				// Lengths of each width for padding
-				const int passengers_number_width   = longest_passengers_number_length;
-				const int passengers_option_width   = longest_passengers_option_length + 4;
+				const int customers_number_width   = longest_customers_number_length;
+				const int customers_option_width   = longest_customers_option_length + 4;
 
 				// Print formatted table.
-				std::stringstream passengers_menu;
-				passengers_menu << "\n";
-				for (unsigned int i = 0; i < passengers_number_column.size(); ++i) {
-					passengers_menu << std::left << std::setw(passengers_number_width) << passengers_number_column[i] << std::right << std::setw(passengers_option_width) << passengers_option_column[i] << "\n";
+				std::stringstream customers_menu;
+				customers_menu << "\n";
+				for (unsigned int i = 0; i < customers_number_column.size(); ++i) {
+					customers_menu << std::left << std::setw(customers_number_width) << customers_number_column[i] << std::right << std::setw(customers_option_width) << customers_option_column[i] << "\n";
 				}
-				std::cout << passengers_menu.str() << "\n";
+				std::cout << customers_menu.str() << "\n";
 
 				// Execute until a valid integer is parsed.
 				do {
-					// Prompt the user for the passenger option selection.
+					// Prompt the user for the customer option selection.
 					std::cout << "Enter option: " << std::flush;
 
 					// Get the string input.
 					std::getline(std::cin, string_input);
 
 					// Validate the input.
-					passengers_option_selection = get_valid_integer(string_input, std::stoi(passengers_number_column.back()));
-				} while (passengers_option_selection == -1);
+					customers_option_selection = get_valid_integer(string_input, std::stoi(customers_number_column.back()));
+				} while (customers_option_selection == -1);
 
-				if (passengers_option_selection == std::stoi(passengers_number_column[1])) {
+				if (customers_option_selection == std::stoi(customers_number_column[1])) {
 					// Prompt for the customer's first name.
 					std::cout << "Enter the customer's first name: " << std::flush;
 					std::string customer_first_name;
@@ -192,46 +192,46 @@ int main() {
 						customer_queue.push(Customer(customer_first_name, customer_last_name, party_members, customer_destination, is_fast_lane_ticket));
 					}
 				}
-			} while (passengers_option_selection != exit_value);
+			} while (customers_option_selection != exit_value);
 		} else if (main_option_selection == std::stoi(main_number_column[2])) {
 			do {
-				// Vectors of strings for bogies options to use to determine dynamic padding
-				std::vector<std::string> bogies_number_column = { "#", "0", "1" };
-				exit_value = std::stoi(bogies_number_column.back());
-				std::vector<std::string> bogies_bogie_column = { "Bogie", "Bogie 9500001" };
-				std::vector<std::string> bogies_option_column = { "Option", "Bogie", "Return" };
+				// Vectors of strings for trains options to use to determine dynamic padding
+				std::vector<std::string> trains_number_column = { "#", "0", "1" };
+				exit_value = std::stoi(trains_number_column.back());
+				std::vector<std::string> trains_bogie_column = { "Bogie", "Bogie 9500001" };
+				std::vector<std::string> trains_option_column = { "Option", "Bogie", "Return" };
 
-				// Length of longest string of each bogies menu column
-				const int longest_bogies_number_length = get_longest_string_length(bogies_number_column);
-				const int longest_bogies_bogie_length  = get_longest_string_length(bogies_bogie_column);
-				const int longest_bogies_option_length = get_longest_string_length(bogies_option_column);
+				// Length of longest string of each trains menu column
+				const int longest_trains_number_length = get_longest_string_length(trains_number_column);
+				const int longest_trains_bogie_length  = get_longest_string_length(trains_bogie_column);
+				const int longest_trains_option_length = get_longest_string_length(trains_option_column);
 
 				// Lengths of each width for padding
-				const int bogies_number_width = longest_bogies_number_length;
-				const int bogies_bogie_width  = longest_bogies_bogie_length + 4;
-				const int bogies_option_width = longest_bogies_option_length + 4;
+				const int trains_number_width = longest_trains_number_length;
+				const int trains_bogie_width  = longest_trains_bogie_length + 4;
+				const int trains_option_width = longest_trains_option_length + 4;
 
 				// Print formatted table.
-				std::stringstream bogies_menu;
-				bogies_menu << "\n";
-				for (unsigned int i = 0; i < bogies_number_column.size() - 1; ++i) {
-					bogies_menu << std::left << std::setw(bogies_number_width) << bogies_number_column[i] << std::right << std::setw(bogies_option_width) << bogies_option_column[i] << std::setw(bogies_bogie_width) << bogies_bogie_column[i] << "\n";
+				std::stringstream trains_menu;
+				trains_menu << "\n";
+				for (unsigned int i = 0; i < trains_number_column.size() - 1; ++i) {
+					trains_menu << std::left << std::setw(trains_number_width) << trains_number_column[i] << std::right << std::setw(trains_option_width) << trains_option_column[i] << std::setw(trains_bogie_width) << trains_bogie_column[i] << "\n";
 				}
-				bogies_menu << std::left << std::setw(bogies_number_width) << bogies_number_column.back() << std::right << std::setw(bogies_option_width) << bogies_option_column.back() << "\n\n";
-				std::cout << bogies_menu.str();
+				trains_menu << std::left << std::setw(trains_number_width) << trains_number_column.back() << std::right << std::setw(trains_option_width) << trains_option_column.back() << "\n\n";
+				std::cout << trains_menu.str();
 
 				// Execute until a valid integer is parsed.
 				do {
-					// Prompt the user for the passenger option selection.
-					std::cout << "Enter passenger: " << std::flush;
+					// Prompt the user for the train option selection.
+					std::cout << "Enter option: " << std::flush;
 
 					// Get the string input.
 					std::getline(std::cin, string_input);
 
 					// Validate the input.
-					bogies_option_selection = get_valid_integer(string_input, std::stoi(bogies_number_column.back()));
-				} while (bogies_option_selection == -1);
-			} while (bogies_option_selection != exit_value);
+					trains_option_selection = get_valid_integer(string_input, std::stoi(trains_number_column.back()));
+				} while (trains_option_selection == -1);
+			} while (trains_option_selection != exit_value);
 		} else if (main_option_selection == std::stoi(main_number_column[3])) {
 			break;
 		}
