@@ -16,14 +16,20 @@
 
 #include <iomanip>
 #include <iostream>
+#include <queue>
 #include <sstream>
 #include <vector>
 
+#include "customer.h"
+#include "party_member.h"
 #include "validation.h"
 
 int get_longest_string_length(std::vector<std::string> const &column_strings);
 
 int main() {
+	// Create customer priority queue.
+	std::priority_queue<Customer> customer_queue;
+
 	// Print the title of the program.
 	std::cout << "Train Booking Application\n";
 
@@ -77,32 +83,28 @@ int main() {
 				// Vectors of strings for passenger options to use to determine dynamic padding
 				std::vector<std::string> passengers_number_column = { "#", "0", "1" };
 				exit_value = std::stoi(passengers_number_column.back());
-				std::vector<std::string> passengers_customer_column = { "Customer", "John Doe" };
-				std::vector<std::string> passengers_option_column = { "Option", "Passenger", "Return" };
+				std::vector<std::string> passengers_option_column = { "Option", "Enter New Customer", "Return" };
 
 				// Length of longest string of each passengers menu column
-				const int longest_passengers_number_length   = get_longest_string_length(passengers_number_column);
-				const int longest_passengers_customer_length = get_longest_string_length(passengers_customer_column);
-				const int longest_passengers_option_length   = get_longest_string_length(passengers_option_column);
+				const int longest_passengers_number_length = get_longest_string_length(passengers_number_column);
+				const int longest_passengers_option_length = get_longest_string_length(passengers_option_column);
 
 				// Lengths of each width for padding
 				const int passengers_number_width   = longest_passengers_number_length;
-				const int passengers_customer_width = longest_passengers_customer_length + 4;
 				const int passengers_option_width   = longest_passengers_option_length + 4;
 
 				// Print formatted table.
 				std::stringstream passengers_menu;
 				passengers_menu << "\n";
-				for (unsigned int i = 0; i < passengers_number_column.size() - 1; ++i) {
-					passengers_menu << std::left << std::setw(passengers_number_width) << passengers_number_column[i] << std::right << std::setw(passengers_option_width) << passengers_option_column[i] << std::setw(passengers_customer_width) << passengers_customer_column[i] << "\n";
+				for (unsigned int i = 0; i < passengers_number_column.size(); ++i) {
+					passengers_menu << std::left << std::setw(passengers_number_width) << passengers_number_column[i] << std::right << std::setw(passengers_option_width) << passengers_option_column[i] << "\n";
 				}
-				passengers_menu << std::left << std::setw(passengers_number_width) << passengers_number_column.back() << std::right << std::setw(passengers_option_width) << passengers_option_column.back() << "\n\n";
-				std::cout << passengers_menu.str();
+				std::cout << passengers_menu.str() << "\n";
 
 				// Execute until a valid integer is parsed.
 				do {
 					// Prompt the user for the passenger option selection.
-					std::cout << "Enter passenger: " << std::flush;
+					std::cout << "Enter option: " << std::flush;
 
 					// Get the string input.
 					std::getline(std::cin, string_input);
@@ -110,6 +112,86 @@ int main() {
 					// Validate the input.
 					passengers_option_selection = get_valid_integer(string_input, std::stoi(passengers_number_column.back()));
 				} while (passengers_option_selection == -1);
+
+				if (passengers_option_selection == std::stoi(passengers_number_column[1])) {
+					// Prompt for the customer's first name.
+					std::cout << "Enter the customer's first name: " << std::flush;
+					std::string customer_first_name;
+					// Get the customer's first name.
+					std::getline(std::cin, customer_first_name);
+
+					// Prompt for the customer's last name.
+					std::cout << "Enter the customer's last name: " << std::flush;
+					std::string customer_last_name;
+					// Get the customer's last name.
+					std::getline(std::cin, customer_last_name);
+
+					// Prompt for the customer's party members.
+					std::cout << "Does the customer have any party members? " << std::flush;
+					// Get the string input.
+					std::getline(std::cin, string_input);
+
+					if (std::tolower(string_input[0]) == 'y') {
+						int party_members_amount;
+						// Execute until a valid integer is parsed.
+						do {
+							// Prompt for the number of the customer's party members.
+							std::cout << "Enter the number of party members: " << std::flush;
+
+							// Get the string input.
+							std::getline(std::cin, string_input);
+
+							// Validate the input.
+							party_members_amount = get_valid_integer(string_input, 19);
+						} while (party_members_amount == -1);
+
+						std::vector<PartyMember> party_members;
+						for (int i = 0; i < party_members_amount; ++i) {
+							// Prompt for the party member's first name.
+							std::cout << "Enter party member " << i << "'s first name: " << std::flush;
+							std::string party_member_first_name;
+							// Get the party member's first name.
+							std::getline(std::cin, party_member_first_name);
+
+							// Prompt for the party member's last name.
+							std::cout << "Enter party member " << i << "'s last name: " << std::flush;
+							std::string party_member_last_name;
+							// Get the party member's last name.
+							std::getline(std::cin, party_member_last_name);
+
+							int party_member_age;
+							// Execute until a valid integer is parsed.
+							do {
+								// Prompt for the party member's age.
+								std::cout << "Enter party member " << i << "'s age: " << std::flush;
+
+								// Get the string input.
+								std::getline(std::cin, string_input);
+
+								// Validate the input.
+								party_member_age = get_valid_integer(string_input, 150);
+							} while (party_member_age == -1);
+
+							// Add party member.
+							party_members.push_back(PartyMember(party_member_first_name, party_member_last_name, party_member_age));
+						}
+
+						// Prompt for the customer's destination.
+						std::cout << "Enter the customer's destination: " << std::flush;
+						std::string customer_destination;
+						// Get the customer's last name.
+						std::getline(std::cin, customer_destination);
+
+						// Prompt for the customer's ticket type.
+						std::cout << "Does the customer want a fast lane ticket? " << std::flush;
+						// Get the string input.
+						std::getline(std::cin, string_input);
+						bool is_fast_lane_ticket = std::tolower(string_input[0]) == 'y' ? true : false;
+
+						// Add customer with party members to customer queue.
+						customer_queue.push(Customer(customer_first_name, customer_last_name, party_members, customer_destination, is_fast_lane_ticket));
+					}
+				}
 			} while (passengers_option_selection != exit_value);
 		} else if (main_option_selection == std::stoi(main_number_column[2])) {
 			do {

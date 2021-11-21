@@ -4,10 +4,11 @@
 /* Constructors */
 /****************/
 
-Customer::Customer(std::string const first_name, std::string const last_name, std::vector<PartyMember> party, std::string const destination)
+Customer::Customer(std::string const first_name, std::string const last_name, std::vector<PartyMember> party, std::string const destination, bool const is_fast_lane)
   : first_name(first_name)
   , last_name(last_name)
-  , destination(destination) {
+  , destination(destination)
+  , is_fast_lane(is_fast_lane) {
 	// Loop through each party member in the vector (n - 1) times.
 	for (unsigned int i = 1; i < party.size(); ++i) {
 		// Get the current party member at index i.
@@ -43,4 +44,12 @@ std::vector<PartyMember> Customer::get_party(void) const {
 
 std::string Customer::get_destination(void) const {
 	return destination;
+}
+
+/**********************/
+/* Operator Overloads */
+/**********************/
+
+bool Customer::operator<(Customer const &r_customer) const {
+	return is_fast_lane < r_customer.is_fast_lane;
 }
