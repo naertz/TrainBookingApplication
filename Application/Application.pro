@@ -10,6 +10,11 @@ CONFIG -= app_bundle
 SOURCES += \
         bogie.cpp \
         customer.cpp \
+        linked_bogies.cpp \
+        linked_bogies_empty_exception.cpp \
+        linked_bogies_invalid_argument_exception.cpp \
+        linked_bogies_out_of_range_exception.cpp \
+        node.cpp \
         party_member.cpp \
         run.cpp \
         validation.cpp
@@ -22,6 +27,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
   bogie.h \
   customer.h \
+  linked_bogies.h \
+  linked_bogies_empty_exception.h \
+  linked_bogies_invalid_argument_exception.h \
+  linked_bogies_out_of_range_exception.h \
+  node.h \
   party_member.h \
   validation.h
 
