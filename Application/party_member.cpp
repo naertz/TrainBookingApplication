@@ -4,7 +4,7 @@
 /* Constructors */
 /****************/
 
-PartyMember::PartyMember(std::string const first_name, std::string const last_name, unsigned int const age)
+PartyMember::PartyMember(std::string const first_name, std::string const last_name, int const age)
   : Member(first_name, last_name)
   , age(age) { }
 

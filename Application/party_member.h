@@ -7,10 +7,10 @@
 
 class PartyMember : public Member {
 	public:
-		PartyMember(std::string const first_name, std::string const last_name, unsigned int const age);
+		PartyMember(std::string const first_name, std::string const last_name, int const age);
 		int get_age(void) const;
 	private:
-		unsigned int age;
+		int age;
 };
 
 #endif // PARTYMEMBER_H
