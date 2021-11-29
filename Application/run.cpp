@@ -232,8 +232,9 @@ int main() {
 					trains_option_selection = get_valid_integer(string_input, std::stoi(trains_number_column.back()));
 				} while (trains_option_selection == -1);
 
-				if (trains_option_selection == std::stoi(trains_number_column[1])) break;
-				else if (trains_option_selection == std::stoi(trains_number_column[2])) break;
+				if (trains_option_selection == std::stoi(trains_number_column[1])) {
+					std::cout << "\n" << linked_bogie_list.get_bogies_list() << "\n";
+				} else if (trains_option_selection == std::stoi(trains_number_column[2])) break;
 				else if (trains_option_selection == std::stoi(trains_number_column[3])) break;
 				else if (trains_option_selection == std::stoi(trains_number_column[4])) break;
 				else if (trains_option_selection == std::stoi(trains_number_column[5])) break;
