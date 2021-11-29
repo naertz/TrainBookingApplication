@@ -199,6 +199,12 @@ int main() {
 			} while (customers_option_selection != exit_value);
 		} else if (main_option_selection == std::stoi(main_number_column[2])) {
 			do {
+				int submenu_exit_value;
+
+				// Option selections initialized for bogie submenu while loops
+				int add_bogie_option_selection    = -1;
+				int remove_bogie_option_selection = -1;
+
 				// Vectors of strings for trains options to use to determine dynamic padding
 				std::vector<std::string> trains_number_column = { "#", "0", "1", "2", "3", "4", "5", "6" };
 				exit_value = std::stoi(trains_number_column.back());
@@ -234,10 +240,84 @@ int main() {
 
 				if (trains_option_selection == std::stoi(trains_number_column[1])) {
 					std::cout << "\n" << linked_bogie_list.get_bogies_list() << "\n";
-				} else if (trains_option_selection == std::stoi(trains_number_column[2])) break;
-				else if (trains_option_selection == std::stoi(trains_number_column[3])) break;
-				else if (trains_option_selection == std::stoi(trains_number_column[4])) break;
-				else if (trains_option_selection == std::stoi(trains_number_column[5])) break;
+				} else if (trains_option_selection == std::stoi(trains_number_column[2])) {
+					do {
+						// Vectors of strings for add bogie options to use to determine dynamic padding
+						std::vector<std::string> add_bogie_number_column = { "#", "0", "1", "2" };
+						submenu_exit_value = std::stoi(add_bogie_number_column.back());
+						std::vector<std::string> add_bogie_option_column = { "Option", "Insert New Bogie At The End", "Insert New Bogie At Location", "Return" };
+
+						// Length of longest string of each add bogie menu column
+						const int longest_add_bogie_number_length = get_longest_string_length(add_bogie_number_column);
+						const int longest_add_bogie_option_length = get_longest_string_length(add_bogie_option_column);
+
+						// Lengths of each width for padding
+						const int add_bogie_number_width = longest_add_bogie_number_length;
+						const int add_bogie_option_width = longest_add_bogie_option_length + 4;
+
+						// Print formatted table.
+						std::stringstream add_bogie_menu;
+						add_bogie_menu << "\n";
+						for (unsigned int i = 0; i < add_bogie_number_column.size(); ++i) {
+							add_bogie_menu << std::left << std::setw(add_bogie_number_width) << add_bogie_number_column[i] << std::right << std::setw(add_bogie_option_width) << add_bogie_option_column[i] << "\n";
+						}
+						std::cout << add_bogie_menu.str() << "\n";
+
+						// Execute until a valid integer is parsed.
+						do {
+							// Prompt the user for the add bogie option selection.
+							std::cout << "Enter option: " << std::flush;
+
+							// Get the string input.
+							std::getline(std::cin, string_input);
+
+							// Validate the input.
+							add_bogie_option_selection = get_valid_integer(string_input, std::stoi(add_bogie_number_column.back()));
+						} while (add_bogie_option_selection == -1);
+
+						if (add_bogie_option_selection == std::stoi(add_bogie_number_column[1])) break;
+						else if (add_bogie_option_selection == std::stoi(add_bogie_number_column[2])) break;
+					} while (add_bogie_option_selection != submenu_exit_value);
+				} else if (trains_option_selection == std::stoi(trains_number_column[3])) break;
+				else if (trains_option_selection == std::stoi(trains_number_column[4])) {
+					do {
+						// Vectors of strings for remove bogie options to use to determine dynamic padding
+						std::vector<std::string> remove_bogie_number_column = { "#", "0", "1", "2" };
+						submenu_exit_value = std::stoi(remove_bogie_number_column.back());
+						std::vector<std::string> remove_bogie_option_column = { "Option", "Remove Bogie With Name", "Remove Bogie With Location", "Return" };
+
+						// Length of longest string of each remove bogie menu column
+						const int longest_remove_bogie_number_length = get_longest_string_length(remove_bogie_number_column);
+						const int longest_remove_bogie_option_length = get_longest_string_length(remove_bogie_option_column);
+
+						// Lengths of each width for padding
+						const int remove_bogie_number_width = longest_remove_bogie_number_length;
+						const int remove_bogie_option_width = longest_remove_bogie_option_length + 4;
+
+						// Print formatted table.
+						std::stringstream remove_bogie_menu;
+						remove_bogie_menu << "\n";
+						for (unsigned int i = 0; i < remove_bogie_number_column.size(); ++i) {
+							remove_bogie_menu << std::left << std::setw(remove_bogie_number_width) << remove_bogie_number_column[i] << std::right << std::setw(remove_bogie_option_width) << remove_bogie_option_column[i] << "\n";
+						}
+						std::cout << remove_bogie_menu.str() << "\n";
+
+						// Execute until a valid integer is parsed.
+						do {
+							// Prompt the user for the remove bogie option selection.
+							std::cout << "Enter option: " << std::flush;
+
+							// Get the string input.
+							std::getline(std::cin, string_input);
+
+							// Validate the input.
+							remove_bogie_option_selection = get_valid_integer(string_input, std::stoi(remove_bogie_number_column.back()));
+						} while (remove_bogie_option_selection == -1);
+
+						if (remove_bogie_option_selection == std::stoi(remove_bogie_number_column[1])) break;
+						else if (remove_bogie_option_selection == std::stoi(remove_bogie_number_column[2])) break;
+					} while (remove_bogie_option_selection != submenu_exit_value);
+				} else if (trains_option_selection == std::stoi(trains_number_column[5])) break;
 				else if (trains_option_selection == std::stoi(trains_number_column[6])) break;
 				else if (trains_option_selection == std::stoi(trains_number_column[7])) break;
 			} while (trains_option_selection != exit_value);
