@@ -7,15 +7,20 @@
 Bogie::Bogie(std::string const &name, int const max_capacity)
   : name(name)
   , occupied_seats(0)
-  , max_capacity(max_capacity) { }
+  , max_capacity(max_capacity == 0 ? 1 : max_capacity) {
+	for (int i = 0; i < max_capacity; ++i) {
+		members.push_back("Empty");
+	}
+}
 
 /************/
 /* Mutators */
 /************/
 
-void Bogie::add_members(int const members) {
-	if (occupied_seats + members <= max_capacity) {
-		occupied_seats += members;
+void Bogie::add_member(Member const &member) {
+	if (occupied_seats + 1 <= max_capacity) {
+		members[occupied_seats] = member.get_first_name() + " " + member.get_last_name();
+		occupied_seats += 1;
 	}
 }
 
