@@ -114,7 +114,7 @@ void LinkedBogies::insert_at(Bogie const &new_bogie, int const index) {
 	}
 }
 
-void LinkedBogies::replace(Bogie const &old_bogie, Bogie const &new_bogie) {
+void LinkedBogies::replace(std::string const &old_bogie_name, Bogie const &new_bogie) {
 	// Throw exception if the linked bogies list is empty.
 	if (front == nullptr) throw LinkedBogiesEmptyException();
 	else {
@@ -127,7 +127,7 @@ void LinkedBogies::replace(Bogie const &old_bogie, Bogie const &new_bogie) {
 		// Traverse to the end of the linked bogies list.
 		while (iterator->get_next_node() != nullptr) {
 			// Determine if the current node pointer contains the old bogie.
-			if (iterator->get_bogie().get_name() == old_bogie.get_name()) {
+			if (iterator->get_bogie().get_name() == old_bogie_name) {
 				is_old_bogie_found = true;
 				// Replace bogie.
 				iterator->set_bogie(new_bogie);
@@ -141,18 +141,18 @@ void LinkedBogies::replace(Bogie const &old_bogie, Bogie const &new_bogie) {
 		// Determine if the old bogie is not found yet.
 		if (!is_old_bogie_found) {
 			// Determine if the current node pointer contains the old bogie.
-			if (iterator->get_bogie().get_name() == old_bogie.get_name()) iterator->set_bogie(new_bogie);
+			if (iterator->get_bogie().get_name() == old_bogie_name) iterator->set_bogie(new_bogie);
 			// Throw exception for non-existing old bogie.
 			else throw LinkedBogiesInvalidArgumentException();
 		}
 	}
 }
 
-void LinkedBogies::remove(Bogie const &bogie) {
+void LinkedBogies::remove(std::string const &bogie_name) {
 	// Throw exception if the linked bogies list is empty.
 	if (front == nullptr) throw LinkedBogiesEmptyException();
 	// Determine if the front node pointer contains the given bogie name.
-	else if (front->get_bogie().get_name() == bogie.get_name()) {
+	else if (front->get_bogie().get_name() == bogie_name) {
 		// Set the front node pointer to the next node pointer.
 		front = front->get_next_node();
 		// Decrement the size.
@@ -167,7 +167,7 @@ void LinkedBogies::remove(Bogie const &bogie) {
 		// Traverse to the end of the linked bogies list.
 		while (iterator->get_next_node() != nullptr) {
 			// Determine if the next node pointer contains the given bogie name.
-			if (iterator->get_next_node()->get_bogie().get_name() == bogie.get_name()) {
+			if (iterator->get_next_node()->get_bogie().get_name() == bogie_name) {
 				is_bogie_found = true;
 				// Set the next node of the current node pointer to the next node pointer of the next node pointer.
 				iterator->set_next_node(iterator->get_next_node()->get_next_node());

@@ -11,8 +11,8 @@ class LinkedBogies {
 		LinkedBogies(void);
 		void insert(Bogie const &new_bogie);
 		void insert_at(Bogie const &bogie, int const index);
-		void replace(Bogie const &old_bogie, Bogie const &new_bogie);
-		void remove(Bogie const &bogie);
+		void replace(std::string const &old_bogie_name, Bogie const &new_bogie);
+		void remove(std::string const &bogie_name);
 		void remove_at(int const index);
 		Bogie get(int const index) const;
 		int get_size(void) const;
