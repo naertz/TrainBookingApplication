@@ -275,8 +275,66 @@ int main() {
 							add_bogie_option_selection = get_valid_integer(string_input, std::stoi(add_bogie_number_column.back()));
 						} while (add_bogie_option_selection == -1);
 
-						if (add_bogie_option_selection == std::stoi(add_bogie_number_column[1])) break;
-						else if (add_bogie_option_selection == std::stoi(add_bogie_number_column[2])) break;
+						if (add_bogie_option_selection == std::stoi(add_bogie_number_column[1])) {
+							// Prompt for the bogie's name.
+							std::cout << "Enter the bogie's name: " << std::flush;
+							std::string bogie_name;
+							// Get the bogie's name.
+							std::getline(std::cin, bogie_name);
+
+							int bogie_max_capacity;
+							// Execute until a valid integer is parsed.
+							do {
+								// Prompt for the bogie's max capacity.
+								std::cout << "Enter the bogie's max capacity: " << std::flush;
+
+								// Get the string input.
+								std::getline(std::cin, string_input);
+
+								// Validate the input.
+								bogie_max_capacity = get_valid_positive_integer(string_input, 150);
+							} while (bogie_max_capacity == -1);
+
+							// Add bogie to the end of the linked bogies list.
+							linked_bogie_list.insert(Bogie(bogie_name, bogie_max_capacity));
+						} else if (add_bogie_option_selection == std::stoi(add_bogie_number_column[2])) {
+							// Prompt for the bogie's name.
+							std::cout << "Enter the bogie's name: " << std::flush;
+							std::string bogie_name;
+							// Get the bogie's name.
+							std::getline(std::cin, bogie_name);
+
+							int bogie_max_capacity;
+							// Execute until a valid integer is parsed.
+							do {
+								// Prompt for the bogie's max capacity.
+								std::cout << "Enter the bogie's max capacity: " << std::flush;
+
+								// Get the string input.
+								std::getline(std::cin, string_input);
+
+								// Validate the input.
+								bogie_max_capacity = get_valid_positive_integer(string_input, 150);
+							} while (bogie_max_capacity == -1);
+
+							int bogie_location;
+							// Execute until a valid integer is parsed.
+							do {
+								// Prompt for the bogie's location.
+								if (linked_bogie_list.is_empty()) std::cout << "Enter the bogie's location (0): " << std::flush;
+								else std::cout << "Enter the bogie's location (0-" << linked_bogie_list.get_size() << "): " << std::flush;
+
+								// Get the string input.
+								std::getline(std::cin, string_input);
+
+								// Validate the input.
+								bogie_location = get_valid_integer(string_input, linked_bogie_list.get_size());
+							} while (bogie_location == -1);
+
+							// Add bogie to the given location of the linked bogies list.
+							try { linked_bogie_list.insert_at(Bogie(bogie_name, bogie_max_capacity), bogie_location); }
+							catch (std::exception const &exception) { std::cout << "\n" << exception.what() << "\n" << "No bogie has been added." << "\n"; }
+						}
 					} while (add_bogie_option_selection != submenu_exit_value);
 				} else if (trains_option_selection == std::stoi(trains_number_column[3])) break;
 				else if (trains_option_selection == std::stoi(trains_number_column[4])) {
