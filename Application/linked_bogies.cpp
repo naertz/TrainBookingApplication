@@ -16,7 +16,7 @@ LinkedBogies::LinkedBogies(void)
 /* Mutators */
 /************/
 
-void LinkedBogies::insert(Bogie new_bogie) {
+void LinkedBogies::insert(Bogie const &new_bogie) {
 	// Allocate a new node pointer.
 	Node *new_node = new Node(new_bogie);
 
@@ -40,7 +40,7 @@ void LinkedBogies::insert(Bogie new_bogie) {
 	}
 }
 
-void LinkedBogies::insert_at(Bogie new_bogie, int index) {
+void LinkedBogies::insert_at(Bogie const &new_bogie, int const index) {
 	// Throw exception if the index is invalid.
 	if (index < 0) throw LinkedBogiesOutOfRangeException();
 
@@ -114,7 +114,7 @@ void LinkedBogies::insert_at(Bogie new_bogie, int index) {
 	}
 }
 
-void LinkedBogies::replace(Bogie old_bogie, Bogie new_bogie) {
+void LinkedBogies::replace(Bogie const &old_bogie, Bogie const &new_bogie) {
 	// Throw exception if the linked bogies list is empty.
 	if (front == nullptr) throw LinkedBogiesEmptyException();
 	else {
@@ -148,7 +148,7 @@ void LinkedBogies::replace(Bogie old_bogie, Bogie new_bogie) {
 	}
 }
 
-void LinkedBogies::remove(Bogie bogie) {
+void LinkedBogies::remove(Bogie const &bogie) {
 	// Throw exception if the linked bogies list is empty.
 	if (front == nullptr) throw LinkedBogiesEmptyException();
 	// Determine if the front node pointer contains the given bogie name.
@@ -185,7 +185,7 @@ void LinkedBogies::remove(Bogie bogie) {
 	}
 }
 
-void LinkedBogies::remove_at(int index) {
+void LinkedBogies::remove_at(int const index) {
 	// Throw exception if the index is invalid.
 	if (index < 0) throw LinkedBogiesOutOfRangeException();
 
@@ -233,7 +233,7 @@ void LinkedBogies::remove_at(int index) {
 /* Accessors */
 /*************/
 
-Bogie LinkedBogies::get(int index) const {
+Bogie LinkedBogies::get(int const index) const {
 	// Return if the linked bogies list is empty.
 	if (front == nullptr) throw LinkedBogiesEmptyException();
 	// Determine if the index is zero.
