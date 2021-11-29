@@ -128,11 +128,15 @@ void LinkedBogies::replace(std::string const &old_bogie_name, Bogie const &new_b
 		while (iterator->get_next_node() != nullptr) {
 			// Determine if the current node pointer contains the old bogie.
 			if (iterator->get_bogie().get_name() == old_bogie_name) {
-				is_old_bogie_found = true;
-				// Replace bogie.
-				iterator->set_bogie(new_bogie);
-				// Exit loop.
-				break;
+				// Determine if the bogie contains passengers. If so, throw an invalid argument exception.
+				if (iterator->get_bogie().get_occupied_seats() > 0) throw LinkedBogiesInvalidArgumentException("This bogie has passengers and cannot be replaced.");
+				else {
+					is_old_bogie_found = true;
+					// Replace bogie.
+					iterator->set_bogie(new_bogie);
+					// Exit loop.
+					break;
+				}
 			}
 
 			iterator = iterator->get_next_node();
@@ -141,9 +145,15 @@ void LinkedBogies::replace(std::string const &old_bogie_name, Bogie const &new_b
 		// Determine if the old bogie is not found yet.
 		if (!is_old_bogie_found) {
 			// Determine if the current node pointer contains the old bogie.
-			if (iterator->get_bogie().get_name() == old_bogie_name) iterator->set_bogie(new_bogie);
+			if (iterator->get_bogie().get_name() == old_bogie_name) {
+				// Determine if the bogie contains passengers. If so, throw an invalid argument exception.
+				if (iterator->get_bogie().get_occupied_seats() > 0) throw LinkedBogiesInvalidArgumentException("This bogie has passengers and cannot be replaced.");
+				else {
+					// Replace bogie.
+					iterator->set_bogie(new_bogie);
+				}
 			// Throw exception for non-existing old bogie.
-			else throw LinkedBogiesInvalidArgumentException();
+			} else throw LinkedBogiesInvalidArgumentException();
 		}
 	}
 }
@@ -153,10 +163,14 @@ void LinkedBogies::remove(std::string const &bogie_name) {
 	if (front == nullptr) throw LinkedBogiesEmptyException();
 	// Determine if the front node pointer contains the given bogie name.
 	else if (front->get_bogie().get_name() == bogie_name) {
-		// Set the front node pointer to the next node pointer.
-		front = front->get_next_node();
-		// Decrement the size.
-		--size;
+		// Determine if the bogie contains passengers. If so, throw an invalid argument exception.
+		if (front->get_bogie().get_occupied_seats() > 0) throw LinkedBogiesInvalidArgumentException("This bogie has passengers and cannot be replaced.");
+		else {
+			// Set the front node pointer to the next node pointer.
+			front = front->get_next_node();
+			// Decrement the size.
+			--size;
+		}
 	} else {
 		// Initialize iterator node pointer as the front node pointer.
 		Node *iterator = front;
@@ -168,13 +182,17 @@ void LinkedBogies::remove(std::string const &bogie_name) {
 		while (iterator->get_next_node() != nullptr) {
 			// Determine if the next node pointer contains the given bogie name.
 			if (iterator->get_next_node()->get_bogie().get_name() == bogie_name) {
-				is_bogie_found = true;
-				// Set the next node of the current node pointer to the next node pointer of the next node pointer.
-				iterator->set_next_node(iterator->get_next_node()->get_next_node());
-				// Decrement the size.
-				--size;
-				// Exit loop.
-				break;
+				// Determine if the bogie contains passengers. If so, throw an invalid argument exception.
+				if (iterator->get_next_node()->get_bogie().get_occupied_seats() > 0) throw LinkedBogiesInvalidArgumentException("This bogie has passengers and cannot be replaced.");
+				else {
+					is_bogie_found = true;
+					// Set the next node of the current node pointer to the next node pointer of the next node pointer.
+					iterator->set_next_node(iterator->get_next_node()->get_next_node());
+					// Decrement the size.
+					--size;
+					// Exit loop.
+					break;
+				}
 			}
 
 			iterator = iterator->get_next_node();
@@ -193,10 +211,14 @@ void LinkedBogies::remove_at(int const index) {
 	if (front == nullptr) throw LinkedBogiesEmptyException();
 	// Determine if the index is zero.
 	else if (index == 0) {
-		// Set the front node pointer to the next node pointer.
-		front = front->get_next_node();
-		// Decrement the size.
-		--size;
+		// Determine if the bogie contains passengers. If so, throw an invalid argument exception.
+		if (front->get_bogie().get_occupied_seats() > 0) throw LinkedBogiesInvalidArgumentException("This bogie has passengers and cannot be replaced.");
+		else {
+			// Set the front node pointer to the next node pointer.
+			front = front->get_next_node();
+			// Decrement the size.
+			--size;
+		}
 	} else {
 		// Initialize iterator node pointer as the front node pointer.
 		Node *iterator = front;
@@ -207,22 +229,30 @@ void LinkedBogies::remove_at(int const index) {
 			if (iterator->get_next_node()->get_next_node() == nullptr) {
 				// Determine if the index is the end of the current linked bogies list.
 				if (i + 1 == index) {
-					// Set the current node pointer to the null pointer of the next node pointer.
+					// Determine if the bogie contains passengers. If so, throw an invalid argument exception.
+					if (iterator->get_next_node()->get_bogie().get_occupied_seats() > 0) throw LinkedBogiesInvalidArgumentException("This bogie has passengers and cannot be replaced.");
+					else {
+						// Set the current node pointer to the null pointer of the next node pointer.
+						iterator->set_next_node(iterator->get_next_node()->get_next_node());
+						// Decrement the size.
+						--size;
+						// Exit loop.
+						break;
+					}
+				// The given index is out of range.
+				} else throw LinkedBogiesOutOfRangeException();
+			// Determine if the next index is the given index.
+			} else if (i + 1 == index) {
+				// Determine if the bogie contains passengers. If so, throw an invalid argument exception.
+				if (iterator->get_next_node()->get_bogie().get_occupied_seats() > 0) throw LinkedBogiesInvalidArgumentException("This bogie has passengers and cannot be replaced.");
+				else {
+					// Set the current node pointer to the next node pointer of the next node pointer.
 					iterator->set_next_node(iterator->get_next_node()->get_next_node());
 					// Decrement the size.
 					--size;
 					// Exit loop.
 					break;
-				// The given index is out of range.
-				} else throw LinkedBogiesOutOfRangeException();
-			// Determine if the next index is the given index.
-			} else if (i + 1 == index) {
-				// Set the current node pointer to the next node pointer of the next node pointer.
-				iterator->set_next_node(iterator->get_next_node()->get_next_node());
-				// Decrement the size.
-				--size;
-				// Exit loop.
-				break;
+				}
 			// Iterate to the next node pointer.
 			} else iterator = iterator->get_next_node();
 		}
