@@ -336,8 +336,36 @@ int main() {
 							catch (std::exception const &exception) { std::cout << "\n" << exception.what() << "\n" << "No bogie has been added." << "\n"; }
 						}
 					} while (add_bogie_option_selection != submenu_exit_value);
-				} else if (trains_option_selection == std::stoi(trains_number_column[3])) break;
-				else if (trains_option_selection == std::stoi(trains_number_column[4])) {
+				} else if (trains_option_selection == std::stoi(trains_number_column[3])) {
+					// Prompt for the old bogie's name.
+					std::cout << "Enter the old bogie's name: " << std::flush;
+					std::string old_bogie_name;
+					// Get the old bogie's name.
+					std::getline(std::cin, old_bogie_name);
+
+					// Prompt for the new bogie's name.
+					std::cout << "Enter the new bogie's name: " << std::flush;
+					std::string new_bogie_name;
+					// Get the new bogie's name.
+					std::getline(std::cin, new_bogie_name);
+
+					int new_bogie_max_capacity;
+					// Execute until a valid integer is parsed.
+					do {
+						// Prompt for the new bogie's max capacity.
+						std::cout << "Enter the bogie's max capacity: " << std::flush;
+
+						// Get the string input.
+						std::getline(std::cin, string_input);
+
+						// Validate the input.
+						new_bogie_max_capacity = get_valid_positive_integer(string_input, 150);
+					} while (new_bogie_max_capacity == -1);
+
+					// Replace the old bogie with the new bogie.
+					try { linked_bogie_list.replace(old_bogie_name, Bogie(new_bogie_name, new_bogie_max_capacity)); }
+					catch (std::exception const &exception) { std::cout << "\n" << exception.what() << "\n" << "No bogie has been replaced." << "\n"; }
+				} else if (trains_option_selection == std::stoi(trains_number_column[4])) {
 					do {
 						// Vectors of strings for remove bogie options to use to determine dynamic padding
 						std::vector<std::string> remove_bogie_number_column = { "#", "0", "1", "2" };
