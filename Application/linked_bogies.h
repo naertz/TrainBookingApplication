@@ -17,6 +17,7 @@ class LinkedBogies {
 		Bogie get(int const index) const;
 		int get_size(void) const;
 		bool is_empty(void) const;
+		std::string get_bogies_list(void) const;
 	private:
 		Node *front;
 		int size;

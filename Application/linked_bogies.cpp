@@ -268,3 +268,29 @@ int LinkedBogies::get_size(void) const {
 bool LinkedBogies::is_empty(void) const {
 	return front == nullptr;
 }
+
+/*************/
+/* Functions */
+/*************/
+
+std::string LinkedBogies::get_bogies_list(void) const {
+	// Determine if the size is greater than or equal to one.
+	if (size > 1) {
+		// Initialize the iterator node pointer as the front node pointer.
+		Node *iterator = front;
+
+		// Create linked bogies list string.
+		std::string linked_bogies_list = "";
+		while (iterator->get_next_node() != nullptr) {
+			linked_bogies_list += iterator->get_bogie().get_bogie_information() + "\n\n";
+			iterator = iterator->get_next_node();
+		}
+		linked_bogies_list += iterator->get_bogie().get_bogie_information();
+
+		// Return linked bogies list string.
+		return linked_bogies_list;
+	}
+
+	// Return empty linked bogies list string.
+	return "There are no bogies in the train.";
+}
