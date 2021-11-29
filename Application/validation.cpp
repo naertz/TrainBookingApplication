@@ -53,7 +53,7 @@ int get_valid_integer(std::string const string_input, int const max) {
 		// Determine if the input is too high.
 		} else if (integer_from_string > max) {
 			// Print a message informing the user that the input is too high.
-			std::cout << "Input is too high. Please enter an integer less than " << max << ".\n";
+			std::cout << "Input is too high. Please enter an integer less than or equal to " << max << ".\n";
 			// Reset integer to invalid state.
 			integer_from_string = -1;
 		}
