@@ -400,8 +400,44 @@ int main() {
 							remove_bogie_option_selection = get_valid_integer(string_input, std::stoi(remove_bogie_number_column.back()));
 						} while (remove_bogie_option_selection == -1);
 
-						if (remove_bogie_option_selection == std::stoi(remove_bogie_number_column[1])) break;
-						else if (remove_bogie_option_selection == std::stoi(remove_bogie_number_column[2])) break;
+						if (remove_bogie_option_selection == std::stoi(remove_bogie_number_column[1])) {
+							// Prompt for the bogie's name.
+							std::cout << "Enter the bogie's name: " << std::flush;
+							std::string bogie_name;
+							// Get the bogie's name.
+							std::getline(std::cin, bogie_name);
+
+							try {
+								// Remove the first bogie with the given name.
+								linked_bogie_list.remove(bogie_name);
+							} catch (std::exception const &exception) {
+								std::cout << "\n" << exception.what() << "\n" << "No bogie has been removed." << "\n";
+							}
+						} else if (remove_bogie_option_selection == std::stoi(remove_bogie_number_column[2])) {
+							bool is_linked_bogie_list_empty = linked_bogie_list.is_empty();
+							int bogie_location;
+							// Execute until a valid integer is parsed.
+							do {
+								// Prompt for the bogie's location.
+								if (is_linked_bogie_list_empty) {
+									std::cout << "\nThere are no bogies to remove.\n";
+									break;
+								} else if (linked_bogie_list.get_size() == 1) std::cout << "Enter the bogie's location (0): " << std::flush;
+								else std::cout << "Enter the bogie's location (0-" << linked_bogie_list.get_size() - 1 << "): " << std::flush;
+
+								// Get the string input.
+								std::getline(std::cin, string_input);
+
+								// Validate the input.
+								bogie_location = get_valid_integer(string_input, linked_bogie_list.get_size() - 1);
+							} while (bogie_location == -1);
+
+							if (!is_linked_bogie_list_empty) {
+								// Remove the bogie with the given location.
+								try { linked_bogie_list.remove_at(bogie_location); }
+								catch (std::exception const &exception) { std::cout << "\n" << exception.what() << "\n" << "No bogie has been removed." << "\n"; }
+							}
+						}
 					} while (remove_bogie_option_selection != submenu_exit_value);
 				} else if (trains_option_selection == std::stoi(trains_number_column[5])) break;
 				else if (trains_option_selection == std::stoi(trains_number_column[6])) break;
