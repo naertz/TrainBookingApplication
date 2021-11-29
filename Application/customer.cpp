@@ -5,8 +5,7 @@
 /****************/
 
 Customer::Customer(std::string const first_name, std::string const last_name, std::vector<PartyMember> party, std::string const destination, bool const is_fast_lane)
-  : first_name(first_name)
-  , last_name(last_name)
+  : Member(first_name, last_name)
   , destination(destination)
   , is_fast_lane(is_fast_lane) {
 	// Loop through each party member in the vector (n - 1) times.
@@ -29,14 +28,6 @@ Customer::Customer(std::string const first_name, std::string const last_name, st
 /*************/
 /* Accessors */
 /*************/
-
-std::string Customer::get_first_name(void) const {
-	return first_name;
-}
-
-std::string Customer::get_last_name(void) const {
-	return last_name;
-}
 
 std::vector<PartyMember> Customer::get_party(void) const {
 	return party;

@@ -14,6 +14,7 @@ SOURCES += \
         linked_bogies_empty_exception.cpp \
         linked_bogies_invalid_argument_exception.cpp \
         linked_bogies_out_of_range_exception.cpp \
+        member.cpp \
         node.cpp \
         party_member.cpp \
         run.cpp \
@@ -31,6 +32,7 @@ HEADERS += \
   linked_bogies_empty_exception.h \
   linked_bogies_invalid_argument_exception.h \
   linked_bogies_out_of_range_exception.h \
+  member.h \
   node.h \
   party_member.h \
   validation.h
