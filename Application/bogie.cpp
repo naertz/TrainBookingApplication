@@ -39,3 +39,15 @@ int Bogie::get_occupied_seats(void) const {
 int Bogie::get_max_capacity(void) const {
 	return max_capacity;
 }
+
+/*************/
+/* Functions */
+/*************/
+
+std::string Bogie::get_bogie_information(void) const {
+	std::string bogie_information = "Bogie: " + name;
+	for (unsigned int i = 0; i < members.size(); ++i) {
+		bogie_information += "\n" + members[i];
+	}
+	return bogie_information;
+}

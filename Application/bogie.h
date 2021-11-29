@@ -13,6 +13,7 @@ class Bogie {
 		std::string get_name(void) const;
 		int get_occupied_seats(void) const;
 		int get_max_capacity(void) const;
+		std::string get_bogie_information(void) const;
 	private:
 		std::string name;
 		std::vector<std::string> members;
