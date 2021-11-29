@@ -61,3 +61,32 @@ int get_valid_integer(std::string const string_input, int const max) {
 	// Returns parsed integer.
 	return integer_from_string;
 }
+
+int get_valid_positive_integer(std::string const string_input, int const max) {
+	// Convert the string to a c-string and then convert to a constant byte string to pass to validation function.
+	const char *string_input_pointer = string_input.c_str();
+
+	// Declare an integer to pass by reference and to store the parsed result from the input string.
+	int integer_from_string = -1;
+
+	// Validate the string to an integer and determine if the input is invalid.
+	if (!validate_string_to_integer(integer_from_string, string_input_pointer)) {
+		// Print a message informing the user that the input is not a valid integer.
+		std::cout << "Invalid input. Please enter a positive integer.\n";
+	// Determine if the input is too low.
+	} else if (integer_from_string < 1) {
+		// Print a message informing the user that the input is too low.
+		std::cout << "Input is too low. Please enter a positive integer.\n";
+		// Reset integer to invalid state.
+		integer_from_string = -1;
+	// Determine if the input is too high.
+	} else if (integer_from_string > max) {
+		// Print a message informing the user that the input is too high.
+		std::cout << "Input is too high. Please enter an integer less than or equal to " << max << ".\n";
+		// Reset integer to invalid state.
+		integer_from_string = -1;
+	}
+
+	// Returns parsed integer.
+	return integer_from_string;
+}

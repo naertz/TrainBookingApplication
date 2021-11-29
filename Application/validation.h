@@ -4,5 +4,6 @@
 #include <string>
 
 int get_valid_integer(std::string const string_input, int const max);
+int get_valid_positive_integer(std::string const string_input, int const max);
 
 #endif // VALIDATION_H
