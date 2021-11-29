@@ -5,9 +5,9 @@
 
 class Node {
 	public:
-		Node(Bogie bogie);
-		void set_bogie(Bogie bogie);
-		void set_next_node(Node *next);
+		Node(Bogie const &bogie);
+		void set_bogie(Bogie const &bogie);
+		void set_next_node(Node *const next);
 		Bogie get_bogie(void) const;
 		Node *get_next_node(void) const;
 	private:

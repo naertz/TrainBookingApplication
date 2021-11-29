@@ -4,7 +4,7 @@
 /* Constructors */
 /****************/
 
-Node::Node(Bogie bogie)
+Node::Node(Bogie const &bogie)
   : bogie(bogie)
   , next(nullptr) { }
 
@@ -12,11 +12,11 @@ Node::Node(Bogie bogie)
 /* Mutators */
 /************/
 
-void Node::set_bogie(Bogie bogie) {
+void Node::set_bogie(Bogie const &bogie) {
 	this->bogie = bogie;
 }
 
-void Node::set_next_node(Node *next) {
+void Node::set_next_node(Node *const next) {
 	this->next = next;
 }
 
