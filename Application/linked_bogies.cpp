@@ -261,10 +261,10 @@ Bogie LinkedBogies::get(int const index) const {
 	}
 }
 
-int LinkedBogies::get_size() const {
+int LinkedBogies::get_size(void) const {
 	return size;
 }
 
-bool LinkedBogies::is_empty() const {
+bool LinkedBogies::is_empty(void) const {
 	return front == nullptr;
 }
