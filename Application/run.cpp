@@ -333,7 +333,7 @@ int main() {
 
 							// Add bogie to the given location of the linked bogies list.
 							try { linked_bogie_list.insert_at(Bogie(bogie_name, bogie_max_capacity), bogie_location); }
-							catch (std::exception const &exception) { std::cout << "\n" << exception.what() << "\n" << "No bogie has been added." << "\n"; }
+							catch (std::exception const &exception) { std::cout << "\n" << exception.what() << "\nNo bogie has been added.\n"; }
 						}
 					} while (add_bogie_option_selection != submenu_exit_value);
 				} else if (trains_option_selection == std::stoi(trains_number_column[3])) {
@@ -364,7 +364,7 @@ int main() {
 
 					// Replace the old bogie with the new bogie.
 					try { linked_bogie_list.replace(old_bogie_name, Bogie(new_bogie_name, new_bogie_max_capacity)); }
-					catch (std::exception const &exception) { std::cout << "\n" << exception.what() << "\n" << "No bogie has been replaced." << "\n"; }
+					catch (std::exception const &exception) { std::cout << "\n" << exception.what() << "\nNo bogie has been replaced.\n"; }
 				} else if (trains_option_selection == std::stoi(trains_number_column[4])) {
 					do {
 						// Vectors of strings for remove bogie options to use to determine dynamic padding
@@ -411,7 +411,7 @@ int main() {
 								// Remove the first bogie with the given name.
 								linked_bogie_list.remove(bogie_name);
 							} catch (std::exception const &exception) {
-								std::cout << "\n" << exception.what() << "\n" << "No bogie has been removed." << "\n";
+								std::cout << "\n" << exception.what() << "\nNo bogie has been removed.\n";
 							}
 						} else if (remove_bogie_option_selection == std::stoi(remove_bogie_number_column[2])) {
 							bool is_linked_bogie_list_empty = linked_bogie_list.is_empty();
@@ -435,7 +435,7 @@ int main() {
 							if (!is_linked_bogie_list_empty) {
 								// Remove the bogie with the given location.
 								try { linked_bogie_list.remove_at(bogie_location); }
-								catch (std::exception const &exception) { std::cout << "\n" << exception.what() << "\n" << "No bogie has been removed." << "\n"; }
+								catch (std::exception const &exception) { std::cout << "\n" << exception.what() << "\nNo bogie has been removed.\n"; }
 							}
 						}
 					} while (remove_bogie_option_selection != submenu_exit_value);
