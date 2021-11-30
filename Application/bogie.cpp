@@ -6,7 +6,7 @@
 
 Bogie::Bogie(std::string const &name, int const max_capacity)
   : name(name)
-  , occupied_seats(0)
+  , available_seats(max_capacity == 0 ? 1 : max_capacity)
   , max_capacity(max_capacity == 0 ? 1 : max_capacity) {
 	for (int i = 0; i < max_capacity; ++i) {
 		members.push_back("Empty");
@@ -18,9 +18,9 @@ Bogie::Bogie(std::string const &name, int const max_capacity)
 /************/
 
 void Bogie::add_member(Member const &member) {
-	if (occupied_seats + 1 <= max_capacity) {
-		members[occupied_seats] = member.get_first_name() + " " + member.get_last_name();
-		occupied_seats += 1;
+	if (available_seats - 1 <= 0) {
+		members[max_capacity - available_seats] = member.get_first_name() + " " + member.get_last_name();
+		available_seats -= 1;
 	}
 }
 
@@ -32,8 +32,8 @@ std::string Bogie::get_name(void) const {
 	return name;
 }
 
-int Bogie::get_occupied_seats(void) const {
-	return occupied_seats;
+int Bogie::get_available_seats(void) const {
+	return available_seats;
 }
 
 int Bogie::get_max_capacity(void) const {
