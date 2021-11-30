@@ -208,7 +208,7 @@ int main() {
 				// Vectors of strings for trains options to use to determine dynamic padding
 				std::vector<std::string> trains_number_column = { "#", "0", "1", "2", "3", "4", "5", "6" };
 				exit_value = std::stoi(trains_number_column.back());
-				std::vector<std::string> trains_option_column = { "Option", "View Bogies", "Add Bogie", "Replace Bogie", "Remove Bogie", "Dequeue Passengers", "Send Train", "Return" };
+				std::vector<std::string> trains_option_column = { "Option", "View Bogies", "Add Bogie", "Replace Bogie", "Remove Bogie", "Dequeue Customers", "Send Train", "Return" };
 
 				// Length of longest string of each trains menu column
 				const int longest_trains_number_length = get_longest_string_length(trains_number_column);
