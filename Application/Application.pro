@@ -12,6 +12,7 @@ SOURCES += \
         customer.cpp \
         linked_bogies.cpp \
         linked_bogies_empty_exception.cpp \
+        linked_bogies_insufficient_capacity_exception.cpp \
         linked_bogies_invalid_argument_exception.cpp \
         linked_bogies_out_of_range_exception.cpp \
         member.cpp \
@@ -30,6 +31,7 @@ HEADERS += \
   customer.h \
   linked_bogies.h \
   linked_bogies_empty_exception.h \
+  linked_bogies_insufficient_capacity_exception.h \
   linked_bogies_invalid_argument_exception.h \
   linked_bogies_out_of_range_exception.h \
   member.h \
