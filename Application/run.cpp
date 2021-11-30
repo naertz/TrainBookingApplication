@@ -407,12 +407,9 @@ int main() {
 							// Get the bogie's name.
 							std::getline(std::cin, bogie_name);
 
-							try {
-								// Remove the first bogie with the given name.
-								linked_bogie_list.remove(bogie_name);
-							} catch (std::exception const &exception) {
-								std::cout << "\n" << exception.what() << "\nNo bogie has been removed.\n";
-							}
+							// Remove the first bogie with the given name.
+							try { linked_bogie_list.remove(bogie_name); }
+							catch (std::exception const &exception) { std::cout << "\n" << exception.what() << "\nNo bogie has been removed.\n"; }
 						} else if (remove_bogie_option_selection == std::stoi(remove_bogie_number_column[2])) {
 							bool is_linked_bogie_list_empty = linked_bogie_list.is_empty();
 							int bogie_location;
