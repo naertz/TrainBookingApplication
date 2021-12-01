@@ -32,7 +32,7 @@ int main() {
 	std::priority_queue<Customer> customer_queue;
 
 	// Create bogie linked list.
-	LinkedBogies linked_bogie_list;
+	LinkedBogies linked_bogies_list;
 
 	// Print the title of the program.
 	std::cout << "Train Booking Application\n";
@@ -239,7 +239,7 @@ int main() {
 				} while (trains_option_selection == -1);
 
 				if (trains_option_selection == std::stoi(trains_number_column[1])) {
-					std::cout << "\n" << linked_bogie_list.get_bogies_list() << "\n";
+					std::cout << "\n" << linked_bogies_list.get_bogies_list() << "\n";
 				} else if (trains_option_selection == std::stoi(trains_number_column[2])) {
 					do {
 						// Vectors of strings for add bogie options to use to determine dynamic padding
@@ -296,7 +296,7 @@ int main() {
 							} while (bogie_max_capacity == -1);
 
 							// Add bogie to the end of the linked bogies list.
-							linked_bogie_list.insert(Bogie(bogie_name, bogie_max_capacity));
+							linked_bogies_list.insert(Bogie(bogie_name, bogie_max_capacity));
 						} else if (add_bogie_option_selection == std::stoi(add_bogie_number_column[2])) {
 							// Prompt for the bogie's name.
 							std::cout << "Enter the bogie's name: " << std::flush;
@@ -321,18 +321,18 @@ int main() {
 							// Execute until a valid integer is parsed.
 							do {
 								// Prompt for the bogie's location.
-								if (linked_bogie_list.is_empty()) std::cout << "Enter the bogie's location (0): " << std::flush;
-								else std::cout << "Enter the bogie's location (0-" << linked_bogie_list.get_size() << "): " << std::flush;
+								if (linked_bogies_list.is_empty()) std::cout << "Enter the bogie's location (0): " << std::flush;
+								else std::cout << "Enter the bogie's location (0-" << linked_bogies_list.get_size() << "): " << std::flush;
 
 								// Get the string input.
 								std::getline(std::cin, string_input);
 
 								// Validate the input.
-								bogie_location = get_valid_integer(string_input, linked_bogie_list.get_size());
+								bogie_location = get_valid_integer(string_input, linked_bogies_list.get_size());
 							} while (bogie_location == -1);
 
 							// Add bogie to the given location of the linked bogies list.
-							try { linked_bogie_list.insert_at(Bogie(bogie_name, bogie_max_capacity), bogie_location); }
+							try { linked_bogies_list.insert_at(Bogie(bogie_name, bogie_max_capacity), bogie_location); }
 							catch (std::exception const &exception) { std::cout << "\n" << exception.what() << "\nNo bogie has been added.\n"; }
 						}
 					} while (add_bogie_option_selection != submenu_exit_value);
@@ -363,7 +363,7 @@ int main() {
 					} while (new_bogie_max_capacity == -1);
 
 					// Replace the old bogie with the new bogie.
-					try { linked_bogie_list.replace(old_bogie_name, Bogie(new_bogie_name, new_bogie_max_capacity)); }
+					try { linked_bogies_list.replace(old_bogie_name, Bogie(new_bogie_name, new_bogie_max_capacity)); }
 					catch (std::exception const &exception) { std::cout << "\n" << exception.what() << "\nNo bogie has been replaced.\n"; }
 				} else if (trains_option_selection == std::stoi(trains_number_column[4])) {
 					do {
@@ -408,39 +408,39 @@ int main() {
 							std::getline(std::cin, bogie_name);
 
 							// Remove the first bogie with the given name.
-							try { linked_bogie_list.remove(bogie_name); }
+							try { linked_bogies_list.remove(bogie_name); }
 							catch (std::exception const &exception) { std::cout << "\n" << exception.what() << "\nNo bogie has been removed.\n"; }
 						} else if (remove_bogie_option_selection == std::stoi(remove_bogie_number_column[2])) {
-							bool is_linked_bogie_list_empty = linked_bogie_list.is_empty();
+							bool is_linked_bogies_list_empty = linked_bogies_list.is_empty();
 							int bogie_location;
 							// Execute until a valid integer is parsed.
 							do {
 								// Prompt for the bogie's location.
-								if (is_linked_bogie_list_empty) {
+								if (is_linked_bogies_list_empty) {
 									std::cout << "\nThere are no bogies to remove.\n";
 									break;
-								} else if (linked_bogie_list.get_size() == 1) std::cout << "Enter the bogie's location (0): " << std::flush;
-								else std::cout << "Enter the bogie's location (0-" << linked_bogie_list.get_size() - 1 << "): " << std::flush;
+								} else if (linked_bogies_list.get_size() == 1) std::cout << "Enter the bogie's location (0): " << std::flush;
+								else std::cout << "Enter the bogie's location (0-" << linked_bogies_list.get_size() - 1 << "): " << std::flush;
 
 								// Get the string input.
 								std::getline(std::cin, string_input);
 
 								// Validate the input.
-								bogie_location = get_valid_integer(string_input, linked_bogie_list.get_size() - 1);
+								bogie_location = get_valid_integer(string_input, linked_bogies_list.get_size() - 1);
 							} while (bogie_location == -1);
 
-							if (!is_linked_bogie_list_empty) {
+							if (!is_linked_bogies_list_empty) {
 								// Remove the bogie with the given location.
-								try { linked_bogie_list.remove_at(bogie_location); }
+								try { linked_bogies_list.remove_at(bogie_location); }
 								catch (std::exception const &exception) { std::cout << "\n" << exception.what() << "\nNo bogie has been removed.\n"; }
 							}
 						}
 					} while (remove_bogie_option_selection != submenu_exit_value);
 				} else if (trains_option_selection == std::stoi(trains_number_column[5])) {
-					try { linked_bogie_list.dequeue_customers(customer_queue); }
+					try { linked_bogies_list.dequeue_customers(customer_queue); }
 					catch (std::exception const &exception) { std::cout << "\n" << exception.what() << "\nNo customer and their party have been dequeued.\n"; }
 				} else if (trains_option_selection == std::stoi(trains_number_column[6])) {
-					try { linked_bogie_list.send_train(); }
+					try { linked_bogies_list.send_train(); }
 					catch (std::exception const &exception) { std::cout << "\n" << exception.what() << "\nNo train has been sent.\n"; }
 				}
 			} while (trains_option_selection != exit_value);
