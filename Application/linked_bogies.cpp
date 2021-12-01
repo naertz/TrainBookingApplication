@@ -304,8 +304,8 @@ bool LinkedBogies::is_empty(void) const {
 /*************/
 
 std::string LinkedBogies::get_bogies_list(void) const {
-	// Determine if the size is greater than or equal to one.
-	if (size > 1) {
+	// Determine if the linked bogies list is not empty.
+	if (!is_empty()) {
 		// Initialize the iterator node pointer as the front node pointer.
 		Node *iterator = front;
 
