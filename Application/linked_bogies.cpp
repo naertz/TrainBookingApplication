@@ -183,7 +183,7 @@ void LinkedBogies::remove(std::string const &bogie_name) {
 			// Determine if the next node pointer contains the given bogie name.
 			if (iterator->get_next_node()->get_bogie().get_name() == bogie_name) {
 				// Determine if the bogie contains passengers. If so, throw an invalid argument exception.
-				if (iterator->get_bogie().get_available_seats() < iterator->get_bogie().get_max_capacity()) throw LinkedBogiesInvalidArgumentException("This bogie has passengers and cannot be replaced.");
+				if (iterator->get_next_node()->get_bogie().get_available_seats() < iterator->get_next_node()->get_bogie().get_max_capacity()) throw LinkedBogiesInvalidArgumentException("This bogie has passengers and cannot be replaced.");
 				else {
 					is_bogie_found = true;
 					// Set the next node of the current node pointer to the next node pointer of the next node pointer.
@@ -230,7 +230,7 @@ void LinkedBogies::remove_at(int const index) {
 				// Determine if the index is the end of the current linked bogies list.
 				if (i + 1 == index) {
 					// Determine if the bogie contains passengers. If so, throw an invalid argument exception.
-					if (iterator->get_bogie().get_available_seats() < iterator->get_bogie().get_max_capacity()) throw LinkedBogiesInvalidArgumentException("This bogie has passengers and cannot be replaced.");
+					if (iterator->get_next_node()->get_bogie().get_available_seats() < iterator->get_next_node()->get_bogie().get_max_capacity()) throw LinkedBogiesInvalidArgumentException("This bogie has passengers and cannot be replaced.");
 					else {
 						// Set the current node pointer to the null pointer of the next node pointer.
 						iterator->set_next_node(iterator->get_next_node()->get_next_node());
@@ -244,7 +244,7 @@ void LinkedBogies::remove_at(int const index) {
 			// Determine if the next index is the given index.
 			} else if (i + 1 == index) {
 				// Determine if the bogie contains passengers. If so, throw an invalid argument exception.
-				if (iterator->get_bogie().get_available_seats() < iterator->get_bogie().get_max_capacity()) throw LinkedBogiesInvalidArgumentException("This bogie has passengers and cannot be replaced.");
+				if (iterator->get_next_node()->get_bogie().get_available_seats() < iterator->get_next_node()->get_bogie().get_max_capacity()) throw LinkedBogiesInvalidArgumentException("This bogie has passengers and cannot be replaced.");
 				else {
 					// Set the current node pointer to the next node pointer of the next node pointer.
 					iterator->set_next_node(iterator->get_next_node()->get_next_node());
