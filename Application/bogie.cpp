@@ -18,7 +18,7 @@ Bogie::Bogie(std::string const &name, int const max_capacity)
 /************/
 
 void Bogie::add_member(Member const &member) {
-	if (available_seats - 1 <= 0) {
+	if (available_seats - 1 >= 0) {
 		members[max_capacity - available_seats] = member.get_first_name() + " " + member.get_last_name();
 		available_seats -= 1;
 	}
