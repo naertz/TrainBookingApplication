@@ -1,6 +1,7 @@
 #include "linked_bogies.h"
 
 #include "linked_bogies_empty_exception.h"
+#include "linked_bogies_insufficient_capacity_exception.h"
 #include "linked_bogies_invalid_argument_exception.h"
 #include "linked_bogies_out_of_range_exception.h"
 
@@ -302,6 +303,66 @@ bool LinkedBogies::is_empty(void) const {
 /*************/
 /* Functions */
 /*************/
+
+int LinkedBogies::get_available_seats(void) const {
+	// Initialize the iterator node pointer as the front node pointer.
+	Node *iterator = front;
+
+	// Initialize the amount of available seats.
+	int available_seats = 0;
+	// Traverse to the end of the linked bogies list.
+	while (iterator != nullptr) {
+		// Add available seats.
+		available_seats += iterator->get_bogie().get_available_seats();
+		// Iterate to the next node pointer.
+		iterator = iterator->get_next_node();
+	}
+
+	// Return the amount of occupied seats.
+	return available_seats;
+}
+
+void LinkedBogies::dequeue_customers(std::priority_queue<Customer> &customers) {
+	// Throw exception if there are no customers in queue.
+	if (customers.empty()) throw LinkedBogiesInvalidArgumentException("There are no customers in queue. Please wait for more customers to add to the queue or send the train if needed.");
+	// Throw exception if the linked bogies list is empty.
+	else if (front == nullptr) throw LinkedBogiesEmptyException("There are no bogies available for passengers. Please add bogies to the train.");
+	// Throw exception if there are no seats available.
+	else if (get_available_seats() == 0) throw LinkedBogiesInsufficientCapacityException("There are no seats available. Please add bogies to the train.");
+	// Throw exception if there are not enough seats available.
+	else if (get_available_seats() < customers.top().get_party_size()) throw LinkedBogiesInsufficientCapacityException("There are not enough seats available. Please add bogies to the train.");
+	else {
+		// Initialize the iterator node pointer as the front node pointer.
+		Node *iterator = front;
+
+		// Add members to the linked bogies list while the end of the train is not met, the customer queue is not empty, and the current party does not exceed the available seats.
+		while (iterator != nullptr && customers.size() != 0 && customers.top().get_party_size() <= get_available_seats()) {
+			// Place the current party into a queue.
+			std::queue<Member> members;
+			members.push(customers.top());
+			for (unsigned int i = 0; i < customers.top().get_party().size(); ++i) {
+				members.push(customers.top().get_party()[i]);
+			}
+
+			while (members.size() > 0) {
+				if (iterator->get_bogie().get_available_seats() > 0) {
+					// Add member to bogie.
+					iterator->get_bogie().add_member(members.front());
+					// Remove member from queue.
+					members.pop();
+				} else {
+					// Proceed to the next bogie.
+					iterator = iterator->get_next_node();
+				}
+			}
+
+			// Remove party from queue.
+			customers.pop();
+			// Reset iterator to the first bogie.
+			iterator = front;
+		}
+	}
+}
 
 std::string LinkedBogies::get_bogies_list(void) const {
 	// Determine if the linked bogies list is not empty.

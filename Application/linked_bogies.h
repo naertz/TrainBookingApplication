@@ -1,9 +1,11 @@
 #ifndef LINKEDBOGIES_H
 #define LINKEDBOGIES_H
 
+#include <queue>
 #include <string>
 
 #include "bogie.h"
+#include "customer.h"
 #include "node.h"
 
 class LinkedBogies {
@@ -17,6 +19,8 @@ class LinkedBogies {
 		Bogie get(int const index) const;
 		int get_size(void) const;
 		bool is_empty(void) const;
+		int get_available_seats(void) const;
+		void dequeue_customers(std::priority_queue<Customer> &customers);
 		std::string get_bogies_list(void) const;
 	private:
 		Node *front;
