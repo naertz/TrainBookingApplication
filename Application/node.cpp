@@ -24,7 +24,7 @@ void Node::set_next_node(Node *const next) {
 /* Accessors */
 /*************/
 
-Bogie Node::get_bogie(void) const {
+Bogie &Node::get_bogie(void) {
 	return bogie;
 }
 
