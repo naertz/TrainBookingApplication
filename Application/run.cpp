@@ -135,6 +135,7 @@ int main() {
 					// Get the string input.
 					std::getline(std::cin, string_input);
 
+					std::vector<PartyMember> party_members;
 					if (std::tolower(string_input[0]) == 'y') {
 						int party_members_amount;
 						// Execute until a valid integer is parsed.
@@ -149,7 +150,6 @@ int main() {
 							party_members_amount = get_valid_integer(string_input, 19);
 						} while (party_members_amount == -1);
 
-						std::vector<PartyMember> party_members;
 						for (int i = 0; i < party_members_amount; ++i) {
 							// Prompt for the party member's first name.
 							std::cout << "Enter party member " << i << "'s first name: " << std::flush;
@@ -179,22 +179,22 @@ int main() {
 							// Add party member.
 							party_members.push_back(PartyMember(party_member_first_name, party_member_last_name, party_member_age));
 						}
-
-						// Prompt for the customer's destination.
-						std::cout << "Enter the customer's destination: " << std::flush;
-						std::string customer_destination;
-						// Get the customer's last name.
-						std::getline(std::cin, customer_destination);
-
-						// Prompt for the customer's ticket type.
-						std::cout << "Does the customer want a fast lane ticket? " << std::flush;
-						// Get the string input.
-						std::getline(std::cin, string_input);
-						bool is_fast_lane_ticket = std::tolower(string_input[0]) == 'y' ? true : false;
-
-						// Add customer with party members to customer queue.
-						customer_queue.push(Customer(customer_first_name, customer_last_name, party_members, customer_destination, is_fast_lane_ticket));
 					}
+
+					// Prompt for the customer's destination.
+					std::cout << "Enter the customer's destination: " << std::flush;
+					std::string customer_destination;
+					// Get the customer's last name.
+					std::getline(std::cin, customer_destination);
+
+					// Prompt for the customer's ticket type.
+					std::cout << "Does the customer want a fast lane ticket? " << std::flush;
+					// Get the string input.
+					std::getline(std::cin, string_input);
+					bool is_fast_lane_ticket = std::tolower(string_input[0]) == 'y' ? true : false;
+
+					// Add customer with party members to customer queue.
+					customer_queue.push(Customer(customer_first_name, customer_last_name, party_members, customer_destination, is_fast_lane_ticket));
 				}
 			} while (customers_option_selection != exit_value);
 		} else if (main_option_selection == std::stoi(main_number_column[2])) {
