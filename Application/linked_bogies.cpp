@@ -364,6 +364,17 @@ void LinkedBogies::dequeue_customers(std::priority_queue<Customer> &customers) {
 	}
 }
 
+void LinkedBogies::send_train(void) {
+	// Throw exception if the linked bogies list is empty.
+	if (front == nullptr) throw LinkedBogiesEmptyException("There are no bogies on the train to send. Please add bogies to the train.");
+	else {
+		// Set the front node pointer to a null pointer.
+		front = nullptr;
+		// Set the size to zero.
+		size = 0;
+	}
+}
+
 std::string LinkedBogies::get_bogies_list(void) const {
 	// Determine if the linked bogies list is not empty.
 	if (!is_empty()) {

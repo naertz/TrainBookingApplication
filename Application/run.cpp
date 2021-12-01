@@ -439,11 +439,11 @@ int main() {
 				} else if (trains_option_selection == std::stoi(trains_number_column[5])) {
 					try { linked_bogie_list.dequeue_customers(customer_queue); }
 					catch (std::exception const &exception) { std::cout << "\n" << exception.what() << "\nNo customer and their party have been dequeued.\n"; }
-				} else if (trains_option_selection == std::stoi(trains_number_column[6])) break;
-				else if (trains_option_selection == std::stoi(trains_number_column[7])) break;
+				} else if (trains_option_selection == std::stoi(trains_number_column[6])) {
+					try { linked_bogie_list.send_train(); }
+					catch (std::exception const &exception) { std::cout << "\n" << exception.what() << "\nNo train has been sent.\n"; }
+				}
 			} while (trains_option_selection != exit_value);
-		} else if (main_option_selection == std::stoi(main_number_column[3])) {
-			break;
 		}
 	}
 

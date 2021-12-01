@@ -21,6 +21,7 @@ class LinkedBogies {
 		bool is_empty(void) const;
 		int get_available_seats(void) const;
 		void dequeue_customers(std::priority_queue<Customer> &customers);
+		void send_train(void);
 		std::string get_bogies_list(void) const;
 	private:
 		Node *front;
