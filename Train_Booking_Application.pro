@@ -1,7 +1,9 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-  Application
+  Application \
+  Tests \
+  Tests
 
 DISTFILES += \
   .gitignore \
