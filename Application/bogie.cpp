@@ -6,8 +6,8 @@
 
 Bogie::Bogie(std::string const &name, int const max_capacity)
   : name(name)
-  , available_seats(max_capacity == 0 ? 1 : max_capacity)
-  , max_capacity(max_capacity == 0 ? 1 : max_capacity) {
+  , available_seats(max_capacity <= 0 ? 1 : max_capacity)
+  , max_capacity(max_capacity <= 0 ? 1 : max_capacity) {
 	for (int i = 0; i < max_capacity; ++i) {
 		members.push_back("Empty");
 	}
