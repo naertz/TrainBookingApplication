@@ -265,6 +265,9 @@ void LinkedBogies::remove_at(int const index) {
 /*************/
 
 Bogie LinkedBogies::get(int const index) const {
+	// Throw exception if the index is invalid.
+	if (index < 0) throw LinkedBogiesOutOfRangeException();
+
 	// Return if the linked bogies list is empty.
 	if (front == nullptr) throw LinkedBogiesEmptyException();
 	// Determine if the index is zero.
